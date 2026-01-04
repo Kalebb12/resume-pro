@@ -2,8 +2,6 @@
 import { aiAnalyze } from '@/lib/aiAnalyze';
 import { extractTextFromFile } from '@/lib/extractTextFromFile';
 import { NextResponse } from 'next/server';
-
-export const runtime = "nodejs";
 export async function POST(req: Request) {
   if (!true) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
@@ -13,9 +11,10 @@ export async function POST(req: Request) {
   const resumeText = await extractTextFromFile(file); // Your parsing logic
 
   // Call AI
-  const analysis = await aiAnalyze(resumeText); // e.g., OpenAI completion
-
-  console.log(analysis)
-
-  return NextResponse.json({ analysis });
+  try {
+    const analysis = await aiAnalyze(resumeText); // e.g., OpenAI completion
+    return NextResponse.json({ analysis });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to analyze resume' }, { status: 500 });
+  }
 }

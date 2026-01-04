@@ -1,64 +1,49 @@
-// utils/aiAnalyze.ts
-import OpenAI from 'openai';
-import { z } from 'zod'; // or use Pydantic equivalent if preferred
+import { GoogleGenAI } from "@google/genai/web";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 
-const ResumeAnalysisSchema = z.object({
-  overallScore: z.number().min(1).max(100),
-  summary: z.string(),
-  strengths: z.array(z.string()),
-  areasForImprovement: z.array(z.string()),
-  keySuggestions: z.array(z.object({
-    description: z.string(),
-    priority: z.enum(['high', 'medium', 'low']),
-  })),
-  atsCompatibility: z.object({
-    score: z.number().min(1).max(100),
-    missingKeywords: z.array(z.string()).optional(),
-    recommendations: z.array(z.string()),
-  }),
-  tailoredFit: z.object({
-    matchScore: z.number().min(1).max(100),
-    matchingSkills: z.array(z.string()),
-    missingSkills: z.array(z.string()),
-    tailoredBulletSuggestions: z.array(z.string()),
-  }).optional(),
-  rewrittenSummary: z.string().optional(),
-});
+const max_char = 12000
 
 export async function aiAnalyze(
   resumeText: string,
   jobDescription?: string
-): Promise<typeof ResumeAnalysisSchema> {
-  const systemPrompt = `You are an expert resume reviewer and career coach. 
-Provide honest, professional, actionable feedback. 
-Be constructive but direct. 
-Score objectively based on clarity, impact, ATS-friendliness, quantifiable achievements, and relevance.
-Always respond ONLY with valid JSON matching the exact schema.`;
+) {
+  const result = await genAI.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: `Resume:
+      ${resumeText.slice(0, max_char)}
+      ${jobDescription ? `Job Description:\n${jobDescription}` : ""}`,
+    config: {
+      systemInstruction: `You are an expert resume reviewer and career coach.
+        Analyze the resume content and return ONLY valid JSON using this exact structure:
 
-  const userPrompt = `Resume text:\n${resumeText}\n\n${jobDescription ? `Job description to tailor against:\n${jobDescription}\n\n` : ''
-    }Analyze this resume and return structured feedback.`;
+        {
+          "overallScore": number (1-100),
+          "summary": string,
+          "strengths": string[],
+          "areasForImprovement": string[],
+          "keySuggestions": {
+            "description": string,
+            "priority": "high" | "medium" | "low"
+          }[],
+          "atsCompatibility": {
+            "score": number (1-100),
+            "recommendations": string[]
+          }
+        }
 
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini', // Cheap + supports structured outputs
-    messages: [
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt },
-    ],
-    response_format: {
-      type: 'json_schema',
-      json_schema: {
-        name: 'resume_analysis',
-        strict: true,
-        schema: ResumeAnalysisSchema.toJSONSchema(), // Convert Zod to JSON Schema (use zod-to-json-schema lib)
-      },
-    },
-    temperature: 0.7,
+        Be direct, ATS-aware, and actionable.`
+    }
   });
 
-  const content = response.choices[0].message.content;
-  if (!content) throw new Error('No analysis generated');
+  const text = result.text;
 
-  return JSON.parse(content) as typeof ResumeAnalysisSchema;
+  // Clean markdown fences if Gemini adds them
+  const clean = text?.replace(/```json|```/g, "").trim();
+
+  try {
+    return JSON.parse(clean!);
+  } catch {
+    throw new Error("AI returned invalid JSON");
+  }
 }
