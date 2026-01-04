@@ -1,14 +1,11 @@
-// app/api/analyze/route.ts
+
 import { aiAnalyze } from '@/lib/aiAnalyze';
 import { extractTextFromFile } from '@/lib/extractTextFromFile';
-import { useUser } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
-// Import your AI lib, e.g., import { OpenAI } from 'openai';
 
+export const runtime = "nodejs";
 export async function POST(req: Request) {
-  const { user } = useUser();
-  const userId = user?.id;
-  if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!true) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const formData = await req.formData();
   const file = formData.get('resume') as File;

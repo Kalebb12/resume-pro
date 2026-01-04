@@ -41,7 +41,7 @@ Always respond ONLY with valid JSON matching the exact schema.`;
     }Analyze this resume and return structured feedback.`;
 
   const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini-2024-07-18', // Cheap + supports structured outputs
+    model: 'gpt-4o-mini', // Cheap + supports structured outputs
     messages: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
@@ -51,11 +51,10 @@ Always respond ONLY with valid JSON matching the exact schema.`;
       json_schema: {
         name: 'resume_analysis',
         strict: true,
-        schema: ResumeAnalysisSchema.parse({}), // Convert Zod to JSON Schema (use zod-to-json-schema lib)
+        schema: ResumeAnalysisSchema.toJSONSchema(), // Convert Zod to JSON Schema (use zod-to-json-schema lib)
       },
     },
     temperature: 0.7,
-    max_tokens: 1500,
   });
 
   const content = response.choices[0].message.content;
