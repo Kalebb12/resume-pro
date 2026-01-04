@@ -19,7 +19,9 @@ export function Footer() {
 
           {/* Product Links */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold text-gray-900">Product</h3>
+            <h3 className="mb-4 text-sm font-semibold text-gray-900">
+              Product
+            </h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -41,11 +43,6 @@ export function Footer() {
                 <a
                   href="#"
                   className="text-sm text-gray-600 transition-colors hover:text-gray-900"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // TODO: Navigate to upload page
-                    console.log("Navigate to upload");
-                  }}
                 >
                   Upload Resume
                 </a>
@@ -55,17 +52,14 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold text-gray-900">Company</h3>
+            <h3 className="mb-4 text-sm font-semibold text-gray-900">
+              Company
+            </h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href="#"
                   className="text-sm text-gray-600 transition-colors hover:text-gray-900"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // TODO: Add about page
-                    console.log("Navigate to about");
-                  }}
                 >
                   About
                 </a>
@@ -74,11 +68,6 @@ export function Footer() {
                 <a
                   href="#"
                   className="text-sm text-gray-600 transition-colors hover:text-gray-900"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // TODO: Add privacy policy
-                    console.log("Navigate to privacy");
-                  }}
                 >
                   Privacy Policy
                 </a>
@@ -87,11 +76,6 @@ export function Footer() {
                 <a
                   href="#"
                   className="text-sm text-gray-600 transition-colors hover:text-gray-900"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // TODO: Add terms of service
-                    console.log("Navigate to terms");
-                  }}
                 >
                   Terms of Service
                 </a>
@@ -101,17 +85,14 @@ export function Footer() {
 
           {/* Social Links */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold text-gray-900">Connect</h3>
+            <h3 className="mb-4 text-sm font-semibold text-gray-900">
+              Connect
+            </h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href="#"
                   className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // TODO: Add social links
-                    console.log("Navigate to Twitter");
-                  }}
                 >
                   <Twitter className="h-4 w-4" />
                   Twitter
@@ -121,11 +102,6 @@ export function Footer() {
                 <a
                   href="#"
                   className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // TODO: Add social links
-                    console.log("Navigate to GitHub");
-                  }}
                 >
                   <Github className="h-4 w-4" />
                   GitHub
@@ -135,11 +111,6 @@ export function Footer() {
                 <a
                   href="#"
                   className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // TODO: Add contact email
-                    console.log("Navigate to contact");
-                  }}
                 >
                   <Mail className="h-4 w-4" />
                   Contact
@@ -172,4 +143,3 @@ export function Footer() {
     </footer>
   );
 }
-

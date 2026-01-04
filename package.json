@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.36.5",
+    "@supabase/supabase-js": "^2.89.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.562.0",
+    "mammoth": "^1.11.0",
     "motion": "^12.23.26",
     "next": "16.1.1",
+    "openai": "^6.15.0",
+    "pdf-parse": "^2.4.5",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tailwind-merge": "^3.4.0"

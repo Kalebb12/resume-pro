@@ -1,16 +1,26 @@
-"use client"
+"use client";
 
-import { Upload, Sparkles, Lock, Zap, FileText, Shield, CheckCircle2, ArrowRight } from "lucide-react";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import {
+  Upload,
+  Sparkles,
+  Lock,
+  Zap,
+  FileText,
+  Shield,
+  CheckCircle2,
+  ArrowRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 // Placeholder handlers for navigation
-const handleUploadResume = () => {
-  // TODO: Navigate to upload page or open upload modal
-  console.log("Navigate to upload resume");
-};
 
 const handleViewPricing = () => {
   // TODO: Scroll to pricing section or navigate to pricing page
@@ -23,16 +33,14 @@ const handleUpgrade = () => {
   console.log("Navigate to Clerk billing checkout");
 };
 
-const handleGetFeedback = () => {
-  // TODO: Navigate to upload page
-  console.log("Navigate to get feedback");
-};
-
 export default function Home() {
+  const router = useRouter();
+  const handleUploadResume = () => {
+    router.push("/upload");
+  };
+
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      
+    <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="mx-auto max-w-7xl">
@@ -41,12 +49,13 @@ export default function Home() {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
               Get instant, AI-powered feedback on your resume
             </h1>
-            
+
             {/* Subheadline explaining free vs paid value */}
             <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-xl">
-              Upload your resume for free. Unlock detailed insights with ResumePro.
+              Upload your resume for free. Unlock detailed insights with
+              ResumePro.
             </p>
-            
+
             {/* CTA buttons - primary and secondary actions */}
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button
@@ -56,11 +65,7 @@ export default function Home() {
               >
                 Upload Resume
               </Button>
-              <Button
-                onClick={handleViewPricing}
-                variant="outline"
-                size="lg"
-              >
+              <Button onClick={handleViewPricing} variant="outline" size="lg">
                 View Pricing
               </Button>
             </div>
@@ -79,35 +84,53 @@ export default function Home() {
               Get professional resume feedback in three simple steps
             </p>
           </div>
-          
+
           {/* Three-step layout with icons */}
           <div className="mx-auto mt-16 max-w-5xl">
             <div className="grid gap-8 sm:grid-cols-3">
               {/* Step 1: Upload */}
               <div className="flex flex-col items-center text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-                  <Upload className="h-8 w-8 text-blue-600" aria-hidden="true" />
+                  <Upload
+                    className="h-8 w-8 text-blue-600"
+                    aria-hidden="true"
+                  />
                 </div>
-                <h3 className="mt-6 text-lg font-semibold text-gray-900">1. Upload your resume</h3>
-                <p className="mt-2 text-base text-gray-600">Upload your resume as a PDF file</p>
+                <h3 className="mt-6 text-lg font-semibold text-gray-900">
+                  1. Upload your resume
+                </h3>
+                <p className="mt-2 text-base text-gray-600">
+                  Upload your resume as a PDF file
+                </p>
               </div>
-              
+
               {/* Step 2: Receive feedback */}
               <div className="flex flex-col items-center text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-                  <Sparkles className="h-8 w-8 text-blue-600" aria-hidden="true" />
+                  <Sparkles
+                    className="h-8 w-8 text-blue-600"
+                    aria-hidden="true"
+                  />
                 </div>
-                <h3 className="mt-6 text-lg font-semibold text-gray-900">2. Receive instant AI feedback</h3>
-                <p className="mt-2 text-base text-gray-600">Get immediate analysis powered by AI</p>
+                <h3 className="mt-6 text-lg font-semibold text-gray-900">
+                  2. Receive instant AI feedback
+                </h3>
+                <p className="mt-2 text-base text-gray-600">
+                  Get immediate analysis powered by AI
+                </p>
               </div>
-              
+
               {/* Step 3: Upgrade */}
               <div className="flex flex-col items-center text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
                   <Lock className="h-8 w-8 text-blue-600" aria-hidden="true" />
                 </div>
-                <h3 className="mt-6 text-lg font-semibold text-gray-900">3. Upgrade to unlock full analysis</h3>
-                <p className="mt-2 text-base text-gray-600">Access detailed insights and improvement tips</p>
+                <h3 className="mt-6 text-lg font-semibold text-gray-900">
+                  3. Upgrade to unlock full analysis
+                </h3>
+                <p className="mt-2 text-base text-gray-600">
+                  Access detailed insights and improvement tips
+                </p>
               </div>
             </div>
           </div>
@@ -125,71 +148,100 @@ export default function Home() {
               Everything you need to improve your resume
             </p>
           </div>
-          
+
           {/* Features grid - responsive layout */}
           <div className="mx-auto mt-16 max-w-5xl">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {/* Feature: AI-powered analysis */}
               <div className="flex flex-col">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-                  <Sparkles className="h-6 w-6 text-blue-600" aria-hidden="true" />
+                  <Sparkles
+                    className="h-6 w-6 text-blue-600"
+                    aria-hidden="true"
+                  />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">AI-powered resume analysis</h3>
+                <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                  AI-powered resume analysis
+                </h3>
                 <p className="mt-2 text-base text-gray-600">
-                  Advanced AI technology provides comprehensive feedback on your resume
+                  Advanced AI technology provides comprehensive feedback on your
+                  resume
                 </p>
               </div>
-              
+
               {/* Feature: Actionable suggestions */}
               <div className="flex flex-col">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-                  <CheckCircle2 className="h-6 w-6 text-blue-600" aria-hidden="true" />
+                  <CheckCircle2
+                    className="h-6 w-6 text-blue-600"
+                    aria-hidden="true"
+                  />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">Actionable improvement suggestions</h3>
+                <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                  Actionable improvement suggestions
+                </h3>
                 <p className="mt-2 text-base text-gray-600">
-                  Get specific, actionable tips to enhance your resume's effectiveness
+                  Get specific, actionable tips to enhance your resume's
+                  effectiveness
                 </p>
               </div>
-              
+
               {/* Feature: ATS-friendly feedback */}
               <div className="flex flex-col">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-                  <FileText className="h-6 w-6 text-blue-600" aria-hidden="true" />
+                  <FileText
+                    className="h-6 w-6 text-blue-600"
+                    aria-hidden="true"
+                  />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">ATS-friendly feedback</h3>
+                <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                  ATS-friendly feedback
+                </h3>
                 <p className="mt-2 text-base text-gray-600">
                   Optimize your resume for Applicant Tracking Systems
                 </p>
               </div>
-              
+
               {/* Feature: Secure authentication */}
               <div className="flex flex-col">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-                  <Shield className="h-6 w-6 text-blue-600" aria-hidden="true" />
+                  <Shield
+                    className="h-6 w-6 text-blue-600"
+                    aria-hidden="true"
+                  />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">Secure authentication with Clerk</h3>
+                <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                  Secure authentication with Clerk
+                </h3>
                 <p className="mt-2 text-base text-gray-600">
                   Your data is protected with industry-standard security
                 </p>
               </div>
-              
+
               {/* Feature: Fast experience */}
               <div className="flex flex-col">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
                   <Zap className="h-6 w-6 text-blue-600" aria-hidden="true" />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">Fast, browser-based experience</h3>
+                <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                  Fast, browser-based experience
+                </h3>
                 <p className="mt-2 text-base text-gray-600">
                   No downloads required. Get feedback instantly in your browser
                 </p>
               </div>
-              
+
               {/* Feature: No payment to try */}
               <div className="flex flex-col">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-                  <CheckCircle2 className="h-6 w-6 text-blue-600" aria-hidden="true" />
+                  <CheckCircle2
+                    className="h-6 w-6 text-blue-600"
+                    aria-hidden="true"
+                  />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">No payment required to try</h3>
+                <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                  No payment required to try
+                </h3>
                 <p className="mt-2 text-base text-gray-600">
                   Start with free basic feedback. Upgrade when you're ready
                 </p>
@@ -210,7 +262,7 @@ export default function Home() {
               Choose the plan that works for you
             </p>
           </div>
-          
+
           {/* Pricing cards - two column layout on larger screens */}
           <div className="mx-auto mt-16 max-w-5xl">
             <div className="grid gap-8 sm:grid-cols-2">
@@ -218,24 +270,32 @@ export default function Home() {
               <Card>
                 <CardHeader>
                   <CardTitle>Free</CardTitle>
-                  <CardDescription>
-                    Perfect for getting started
-                  </CardDescription>
+                  <CardDescription>Perfect for getting started</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-green-600" aria-hidden="true" />
-                      <span className="text-base text-gray-600">Basic resume summary</span>
+                      <CheckCircle2
+                        className="h-5 w-5 shrink-0 text-green-600"
+                        aria-hidden="true"
+                      />
+                      <span className="text-base text-gray-600">
+                        Basic resume summary
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-green-600" aria-hidden="true" />
-                      <span className="text-base text-gray-600">Limited feedback</span>
+                      <CheckCircle2
+                        className="h-5 w-5 shrink-0 text-green-600"
+                        aria-hidden="true"
+                      />
+                      <span className="text-base text-gray-600">
+                        Limited feedback
+                      </span>
                     </li>
                   </ul>
                 </CardContent>
               </Card>
-              
+
               {/* Pro Plan Card - highlighted/recommended */}
               <Card className="relative border-2 border-blue-600 shadow-lg">
                 {/* Recommended badge */}
@@ -246,23 +306,36 @@ export default function Home() {
                 </div>
                 <CardHeader>
                   <CardTitle>Pro</CardTitle>
-                  <CardDescription>
-                    Full access to all features
-                  </CardDescription>
+                  <CardDescription>Full access to all features</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-blue-600" aria-hidden="true" />
-                      <span className="text-base text-gray-600">Full AI analysis</span>
+                      <CheckCircle2
+                        className="h-5 w-5 shrink-0 text-blue-600"
+                        aria-hidden="true"
+                      />
+                      <span className="text-base text-gray-600">
+                        Full AI analysis
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-blue-600" aria-hidden="true" />
-                      <span className="text-base text-gray-600">Detailed improvement tips</span>
+                      <CheckCircle2
+                        className="h-5 w-5 shrink-0 text-blue-600"
+                        aria-hidden="true"
+                      />
+                      <span className="text-base text-gray-600">
+                        Detailed improvement tips
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-blue-600" aria-hidden="true" />
-                      <span className="text-base text-gray-600">Exportable feedback</span>
+                      <CheckCircle2
+                        className="h-5 w-5 shrink-0 text-blue-600"
+                        aria-hidden="true"
+                      />
+                      <span className="text-base text-gray-600">
+                        Exportable feedback
+                      </span>
                     </li>
                   </ul>
                   <Button
@@ -290,16 +363,27 @@ export default function Home() {
             </h2>
             <div className="mt-8 space-y-4 text-left text-base leading-7 text-gray-600">
               <p>
-                <strong className="font-semibold text-gray-900">Secure payments:</strong> Payments run in test mode for demo purposes. 
-                All transactions are processed securely through Clerk Billing.
+                <strong className="font-semibold text-gray-900">
+                  Secure payments:
+                </strong>{" "}
+                Payments run in test mode for demo purposes. All transactions
+                are processed securely through Clerk Billing.
               </p>
               <p>
-                <strong className="font-semibold text-gray-900">Authentication & billing:</strong> Your account security and payment 
-                processing are handled entirely by Clerk, a trusted platform used by thousands of applications.
+                <strong className="font-semibold text-gray-900">
+                  Authentication & billing:
+                </strong>{" "}
+                Your account security and payment processing are handled
+                entirely by Clerk, a trusted platform used by thousands of
+                applications.
               </p>
               <p>
-                <strong className="font-semibold text-gray-900">Data privacy:</strong> Resume data is not permanently stored. 
-                Analysis results may be temporarily saved in your browser's localStorage for demo purposes only.
+                <strong className="font-semibold text-gray-900">
+                  Data privacy:
+                </strong>{" "}
+                Resume data is not permanently stored. Analysis results may be
+                temporarily saved in your browser's localStorage for demo
+                purposes only.
               </p>
             </div>
           </div>
@@ -313,11 +397,12 @@ export default function Home() {
             Ready to improve your resume?
           </h2>
           <p className="mt-6 text-lg leading-8 text-blue-100">
-            Join thousands of job seekers who have improved their resumes with ResumePro's AI-powered feedback.
+            Join thousands of job seekers who have improved their resumes with
+            ResumePro's AI-powered feedback.
           </p>
           <div className="mt-10">
             <Button
-              onClick={handleGetFeedback}
+              onClick={handleUploadResume}
               size="lg"
               variant="secondary"
               className="bg-white text-blue-600 hover:bg-gray-50"
@@ -328,8 +413,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
-      <Footer />
     </div>
   );
 }
