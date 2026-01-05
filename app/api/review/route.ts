@@ -1,10 +1,13 @@
 
 import { aiAnalyze } from '@/lib/aiAnalyze';
 import { extractTextFromFile } from '@/lib/extractTextFromFile';
+import { currentUser } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
-  if (!true) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
+  const user = await currentUser()
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   const formData = await req.formData();
   const file = formData.get('resume') as File;
   // Parse file contents...
