@@ -20,7 +20,8 @@ import {
 } from "lucide-react";
 import { Progress } from "./ui/progress";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const AnalysisReslut = ({
   analysis,
@@ -29,8 +30,17 @@ const AnalysisReslut = ({
   analysis: ResumeAnalysisType;
   handleReset: () => void;
 }) => {
-  const [isPro, setIsPro] = useState(true); // TODO: Check from Clerk subscription
+  const [isPro, setIsPro] = useState(false); // TODO: Fetch actual subscription status from Clerk
+  const router = useRouter();
+  useEffect(() => {
+    const fetchSubscriptionStatus = async () => {
+      const response = await fetch("/api/clerk");
+      const data = await response.json();
+      setIsPro(data.isPro);
+    };
 
+    fetchSubscriptionStatus();
+  }, []);
   const getScoreColor = (score: number) => {
     if (score >= 80) return "text-green-600";
     if (score >= 60) return "text-yellow-600";
@@ -210,7 +220,9 @@ const AnalysisReslut = ({
                     <p className="flex-1 text-base text-gray-700">
                       {suggestion.description}
                     </p>
-                    <BadgeAlert className={getPriorityColor(suggestion.priority)} />
+                    <BadgeAlert
+                      className={getPriorityColor(suggestion.priority)}
+                    />
                   </div>
                 </div>
               ))}
@@ -224,8 +236,7 @@ const AnalysisReslut = ({
                   variant="outline"
                   className="mt-3 border-blue-600 text-blue-600 hover:bg-blue-50"
                   onClick={() => {
-                    // TODO: Navigate to upgrade page
-                    console.log("Navigate to upgrade");
+                    router.push("/pricing");
                   }}
                 >
                   Upgrade to Pro
@@ -245,8 +256,7 @@ const AnalysisReslut = ({
           <Button
             className="flex-1 bg-blue-600 hover:bg-blue-700"
             onClick={() => {
-              // TODO: Navigate to upgrade page
-              console.log("Navigate to upgrade");
+              router.push("/pricing");
             }}
           >
             Upgrade to Pro for Full Analysis

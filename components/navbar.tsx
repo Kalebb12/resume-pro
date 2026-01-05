@@ -20,7 +20,7 @@ export function Navbar() {
         {/* Navigation Links - Hidden on mobile, shown on desktop */}
         <div className="hidden items-center gap-6 md:flex">
           <Link
-            href="#pricing"
+            href="/pricing"
             className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
           >
             Pricing

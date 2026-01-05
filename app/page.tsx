@@ -28,17 +28,16 @@ const handleViewPricing = () => {
   pricingSection?.scrollIntoView({ behavior: "smooth" });
 };
 
-const handleUpgrade = () => {
-  // TODO: Navigate to Clerk billing checkout
-  console.log("Navigate to Clerk billing checkout");
-};
 
 export default function Home() {
   const router = useRouter();
   const handleUploadResume = () => {
     router.push("/upload");
   };
-
+  
+  const handleUpgrade = () => {
+    router.push("/pricing");
+  };
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
