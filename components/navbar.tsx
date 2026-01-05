@@ -4,7 +4,7 @@ import Link from "next/link";
 import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export function Navbar() {
   const router = useRouter();
