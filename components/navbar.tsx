@@ -4,8 +4,10 @@ import Link from "next/link";
 import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
+import { useRouter } from "next/router";
 
 export function Navbar() {
+  const router = useRouter();
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-backdrop-filter:bg-white/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -43,7 +45,7 @@ export function Navbar() {
               size="sm"
               onClick={() => {
                 // TODO: Navigate to upload page
-                console.log("Navigate to upload");
+                router.push("/upload");
               }}
             >
               Get Started
@@ -63,4 +65,3 @@ export function Navbar() {
     </nav>
   );
 }
-
